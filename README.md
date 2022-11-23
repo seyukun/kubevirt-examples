@@ -16,3 +16,87 @@ You can use the following OS.
 - [opensuse-leap:15.3](https://hub.docker.com/layers/docheio/containerdisk-opensuse-leap/15.3/images/sha256-bdc783d3056f4de807b5f8227f9c911247fac1439f7d9ea0b451a4464a8a3d5f?context=explore)
 - [opensuse-leap:15.4](https://hub.docker.com/layers/docheio/containerdisk-opensuse-leap/15.4/images/sha256-dd346b4173a5bfbeeba1438dc6af68732ddd3d0d09a05b037dd8a3858c08a395?context=explore)
 
+```yaml
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: example
+spec:
+  source:
+    registry:
+      url: "docker://docker.io/docheio/containerdisk-archlinux:0.1"
+  pvc:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 10Gi
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  labels:
+    kubevirt.io/os: linux
+  name: example
+spec:
+  running: true
+  template:
+    metadata:
+      labels:
+        kubevirt.io/domain: example
+    spec:
+      nodeSelector:
+        kubevirt.io/schedulable: "true"
+      domain:
+        devices:
+          disks:
+          - disk:
+              bus: virtio
+            name: disk0
+          - cdrom:
+              bus: sata
+              readonly: true
+            name: cloudinitdisk
+          interfaces:
+          - name: default
+            macAddress: '72:35:18:b7:59:7a'
+            masquerade: {}
+        machine:
+          type: q35
+        resources:
+          requests:
+            memory: 6G
+            cpu: '6'
+      networks:
+      - name: default
+        pod: {}
+      volumes:
+      - name: disk0
+        dataVolume:
+          name: example
+      - name: cloudinitdisk
+        cloudInitNoCloud:
+         userData: |
+            #cloud-config
+            hostname: example
+            ssh_pwauth: false
+            disable_root: true
+            ssh_authorized_keys:
+            - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIED25519ED25519ED25519ed25519+ED25519ed25519 user@local
+            runcmd:
+            - echo "I would recommend changing to a fast repository here."
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: examle
+spec:
+  type: LoadBalancer
+  selector:
+    kubevirt.io/domain: examle
+  ports:
+  - protocol: TCP
+    name: tcp22
+    port: 22
+    targetPort: 22
+```
