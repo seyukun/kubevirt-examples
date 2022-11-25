@@ -92,11 +92,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: examle
+  name: example
 spec:
   type: LoadBalancer
   selector:
-    kubevirt.io/domain: examle
+    kubevirt.io/domain: example
   ports:
   - protocol: TCP
     name: tcp22
