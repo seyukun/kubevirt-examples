@@ -15,8 +15,8 @@ You can use the following OS.
 - [archlinux](https://hub.docker.com/layers/docheio/containerdisk-archlinux/0.1/images/sha256-c7c521134ccf397ff87ac6434beb3890e81fb203a29abd27ef4f32907a900cd7?context=explore)
 - [opensuse-leap:15.3](https://hub.docker.com/layers/docheio/containerdisk-opensuse-leap/15.3/images/sha256-bdc783d3056f4de807b5f8227f9c911247fac1439f7d9ea0b451a4464a8a3d5f?context=explore)
 - [opensuse-leap:15.4](https://hub.docker.com/layers/docheio/containerdisk-opensuse-leap/15.4/images/sha256-dd346b4173a5bfbeeba1438dc6af68732ddd3d0d09a05b037dd8a3858c08a395?context=explore)
-- [gentoo:default](https://hub.docker.com/layers/docheio/containerdisk-gentoo/default/images/sha256-b503223751250a72ad5ca9e2364110edad8cec987c1f953105ef3764ac7b859c?context=repo)
-- [gentoo:systemd](https://hub.docker.com/layers/docheio/containerdisk-gentoo/systemd/images/sha256-452dd705c9c94ba87b024992b99502021a18cf2b84a71ddd84f4b4629eaf49c7?context=repo)
+- [gentoo:default](https://hub.docker.com/layers/docheio/containerdisk-gentoo/default/images/sha256-b503223751250a72ad5ca9e2364110edad8cec987c1f953105ef3764ac7b859c?context=repo) - not supported network
+- [gentoo:systemd](https://hub.docker.com/layers/docheio/containerdisk-gentoo/systemd/images/sha256-452dd705c9c94ba87b024992b99502021a18cf2b84a71ddd84f4b4629eaf49c7?context=repo) - not supported network
 
 
 ```yaml
