@@ -30,7 +30,7 @@ spec:
       url: "docker://docker.io/docheio/containerdisk-archlinux:0.1"
   pvc:
     accessModes:
-      - ReadWriteOnce
+      - ReadWriteMany
     resources:
       requests:
         storage: 10Gi
